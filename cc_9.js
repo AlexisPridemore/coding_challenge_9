@@ -34,6 +34,10 @@ class Manager extends Employee {
         return this.salary * 12 * 0.10;
     }  //calculate bonus
 
+    // Task 4 modification #2:
+    calculateAnnualSalary() {
+        return this.salary * 12 + this.calculateBonus();
+    }  //calculate and consider bonuses for managers
 };
 const mgr1 = new Manager("John Smith", 201, "IT", 8000, 5);
 console.log(mgr1.getDetails());
@@ -52,9 +56,21 @@ class Company {
     listEmployees() {    //log employee details
         this.employees.forEach(employee => console.log(employee.getDetails()));
     }
+
+    // Task 4 modifcation #1:
+    calculateTotalPayroll() {    
+        return this.employees.reduce((total, employee) => {  //calculate total payroll
+            return total + employee.calculateAnnualSalary();
+        }, 0);  // sum of all employee salaries (including managers)
+    };  //payroll system
 };
 
 const company = new Company("TechCorp");
 company.addEmployee(emp1);
 company.addEmployee(mgr1);
 company.listEmployees();   //Test data log
+
+// Task 4: Implementing a Payroll System
+
+console.log(company.calculateTotalPayroll()); //Test data log
+
