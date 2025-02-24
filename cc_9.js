@@ -40,6 +40,7 @@ class Manager extends Employee {
     }  //calculate and consider bonuses for managers
 };
 const mgr1 = new Manager("John Smith", 201, "IT", 8000, 5);
+
 console.log(mgr1.getDetails());
 console.log(mgr1.calculateBonus()); //Test data log
 
@@ -63,7 +64,13 @@ class Company {
             return total + employee.calculateAnnualSalary();
         }, 0);  // sum of all employee salaries (including managers)
     };  //payroll system
-};
+
+    // Task 5 modification: Implementing Promotions
+    promoteToManager(employee, teamSize) {
+        const index = this.employees.indexOf(employee);
+            this.employees[index] = new Manager(employee.name, employee.id, employee.department, employee.salary, teamSize);
+    }  //promotion to manager
+};  //company class
 
 const company = new Company("TechCorp");
 company.addEmployee(emp1);
@@ -73,4 +80,9 @@ company.listEmployees();   //Test data log
 // Task 4: Implementing a Payroll System
 
 console.log(company.calculateTotalPayroll()); //Test data log
+
+// Task 5: Implementing Promotions
+
+company.promoteToManager(emp1, 3);  //promote employee log
+company.listEmployees();  //new employee list log
 
